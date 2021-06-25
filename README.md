@@ -57,3 +57,7 @@ npm run release-win
 ```shell
 npm run release-mac
 ```
+
+## その他
+
+アイコンは [いらすとや](https://www.irasutoya.com/) 様より頂戴しました。ありがとうございます。

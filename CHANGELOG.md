@@ -1,6 +1,9 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+### Docs
+- update docs
+
 
 <a name="v0.1.0"></a>
 ## v0.1.0 - 2021-06-25
