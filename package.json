@@ -1,0 +1,23 @@
+{
+  "name": "chikku-takku",
+  "version": "0.1.0",
+  "description": "でじたる時計です",
+  "main": "app/main.js",
+  "dependencies": {
+    "electron": "^13.1.4",
+    "electron-icon-builder": "^2.0.1",
+    "electron-packager": "^15.2.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  },
+  "scripts": {
+    "start": "electron .",
+    "create-icons": "electron-icon-builder --input=./icon.png --output=./app",
+    "release-mac": "electron-packager ./app chikku-takku --platform=darwin --arch=x64 --icon=./app/icons/mac/icon.icns --overwrite",
+    "release-win": "electron-packager ./app chikku-takku --platform=win32 --arch=x64 --icon=./app/icons/win/icon.ico --overwrite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Noritaka IZUMI <noritaka.izumi@gmail.com>",
+  "license": "MIT"
+}

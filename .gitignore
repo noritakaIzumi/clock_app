@@ -1,0 +1,9 @@
+# Editor configs
+/.idea
+
+# npm
+/node_modules
+/package-lock.json
+
+# built app
+/chikku-takku-*
