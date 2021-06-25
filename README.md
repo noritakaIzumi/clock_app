@@ -14,6 +14,16 @@ Tick Tock にすると某 SNS と名前が非常に似るので、できるだ�
 
 Conventional Commits については [こちら](https://www.conventionalcommits.org/)
 
+- CHANGELOG の更新
+
+[git-chglog](https://github.com/git-chglog/git-chglog) を使用します。
+
+ファイル名は `CHANGELOG.md` とし、バージョンタグを付けたコミットの後で `update CHANGELOG` というメッセージでコミットしてください。
+
+```shell
+git-chglog -o CHANGELOG.md
+```
+
 ### Preview, build app
 
 Prepare (npm required)
