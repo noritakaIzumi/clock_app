@@ -2,6 +2,7 @@
 ## [Unreleased]
 
 ### Docs
+- add repository URL to package.json
 - update docs
 
 
