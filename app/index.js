@@ -27,13 +27,24 @@
         clock.innerText = `${year}/${month}/${date}\n${hour}:${minute}:${second}`;
     };
 
-    let startTime = getTime();
-    const interval = 10; // milliseconds
+    const saveWindowPosition = () => {
+        const windowPosition = [window.screenX, window.screenY];
+        localStorage.setItem('windowPosition', JSON.stringify(windowPosition));
+    };
+
+    let time1 = getTime();
+    let time2 = getTime();
+    const interval1 = 10; // milliseconds
+    const interval2 = 1000; // milliseconds
     const loop = () => {
         const currentTime = getTime();
-        if (currentTime - startTime >= interval) {
+        if (currentTime - time1 >= interval1) {
             updateClock.call();
-            startTime = getTime();
+            time1 = getTime();
+        }
+        if (currentTime - time2 >= interval2) {
+            saveWindowPosition.call();
+            time2 = getTime();
         }
         requestAnimationFrame(loop);
     };

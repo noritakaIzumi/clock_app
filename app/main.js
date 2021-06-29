@@ -18,13 +18,22 @@ function createWindow(width, height, workAreaSize) {
             preload: path.join(__dirname, 'preload.js')
         },
     });
-    win.setPosition(workAreaSize.width - width, workAreaSize.height - height, false);
     win.removeMenu();
 
-    win.loadFile(path.join(__dirname, '/index.html')).then(() => {
+    win.webContents
+        .executeJavaScript('JSON.parse(localStorage.getItem("windowPosition"));', true)
+        .then(result => {
+            if (result !== null) {
+                win.setPosition(result[0], result[1], false);
+            } else {
+                win.setPosition(workAreaSize.width - width, workAreaSize.height - height, false);
+            }
+        });
+
+    win.loadFile(path.join(__dirname, '/index_default.html')).then(() => {
     });
 
-    win.on("closed", function () {
+    win.on('closed', function () {
         win = null;
         tray = null;
     });
@@ -60,7 +69,7 @@ app.whenReady().then(() => {
                     }
                 },
                 {
-                    label: '右下', checked: true, click: () => {
+                    label: '右下', click: () => {
                         win.setPosition(workAreaSize.width - width, workAreaSize.height - height, false);
                     }
                 },
