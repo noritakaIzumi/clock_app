@@ -2,6 +2,14 @@
 ## [Unreleased]
 
 
+<a name="v0.3.0"></a>
+## [v0.3.0] - 2021-06-29
+### Feat
+- add theme
+- the display position can be saved
+- the display position can be selected
+
+
 <a name="v0.2.0"></a>
 ## [v0.2.0] - 2021-06-29
 ### Docs
@@ -18,5 +26,6 @@
 - release first version
 
 
-[Unreleased]: https://github.com/noritakaIzumi/clock_app/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/noritakaIzumi/clock_app/compare/v0.3.0...HEAD
+[v0.3.0]: https://github.com/noritakaIzumi/clock_app/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/noritakaIzumi/clock_app/compare/v0.1.0...v0.2.0
