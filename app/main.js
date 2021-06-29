@@ -39,18 +39,45 @@ function createWindow(width, height, workAreaSize) {
     });
 
     win.once('ready-to-show', () => {
+        win.webContents
+            .executeJavaScript('localStorage.getItem("theme");', true)
+            .then(result => {
+                switch (result) {
+                    case 'default':
+                    case 'digital':
+                        win.loadFile(path.join(__dirname, `/index_${result}.html`)).then(() => {
+                        });
+                        break;
+                }
+            });
         win.showInactive();
     });
 }
 
 app.whenReady().then(() => {
     const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
-    const width = 200;
-    const height = 100;
+    const width = 190;
+    const height = 80;
 
     const iconSize = 16;
     tray = new Tray(path.join(__dirname, `icons/png/${iconSize}x${iconSize}.png`));
     const contextMenu = Menu.buildFromTemplate([
+        {
+            label: 'テーマ', type: 'submenu', submenu: [
+                {
+                    label: 'Default', click: () => {
+                        win.loadFile(path.join(__dirname, `/index_default.html`)).then(() => {
+                        });
+                    }
+                },
+                {
+                    label: 'Digital', click: () => {
+                        win.loadFile(path.join(__dirname, `/index_digital.html`)).then(() => {
+                        });
+                    }
+                },
+            ]
+        },
         {
             label: '表示位置', type: 'submenu', submenu: [
                 {
