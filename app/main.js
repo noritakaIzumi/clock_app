@@ -1,50 +1,77 @@
-// アプリケーション作成用のモジュールを読み込み
-const {app, BrowserWindow, screen} = require('electron');
+const {app, BrowserWindow, screen, Menu, Tray} = require('electron');
+const path = require('path');
 
-// メインウィンドウ
-let mainWindow;
+let win = null;
+let tray = null;
 
 function createWindow() {
-    // メインウィンドウを作成します
     const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
-    const width = 250;
-    const height = 150;
-    mainWindow = new BrowserWindow({
+    const width = 200;
+    const height = 100;
+    win = new BrowserWindow({
         width: width,
         height: height,
         x: workAreaSize.width - width,
         y: workAreaSize.height - height,
+        show: false,
+        alwaysOnTop: true,
         transparent: true,
+        resizable: false,
+        frame: false,
+        skipTaskbar: true,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js')
+        },
     });
-    mainWindow.removeMenu();
+    win.removeMenu();
 
-    // メインウィンドウに表示するURLを指定します
-    // （今回はmain.jsと同じディレクトリのindex.html）
-    mainWindow.loadFile('index.html');
+    win.loadFile(path.join(__dirname, '/index.html')).then(() => {
+    });
 
-    // デベロッパーツールの起動
-    // mainWindow.webContents.openDevTools();
+    win.on("closed", function () {
+        win = null;
+        tray = null;
+    });
 
-    // メインウィンドウが閉じられたときの処理
-    mainWindow.on('closed', () => {
-        mainWindow = null;
+    win.once('ready-to-show', () => {
+        win.showInactive();
     });
 }
 
-//  初期化が完了した時の処理
-app.on('ready', createWindow);
+app.whenReady().then(() => {
+    const iconSize = 16;
+    tray = new Tray(path.join(__dirname, `icons/png/${iconSize}x${iconSize}.png`));
+    const contextMenu = Menu.buildFromTemplate([
+        {
+            label: '隠す', click: () => {
+                win.setAlwaysOnTop(false);
+                win.hide();
+            }
+        },
+        {
+            label: '終了', click: () => {
+                win.close();
+            }
+        }
+    ]);
+    tray.on('click', () => {
+        win.setAlwaysOnTop(true);
+        win.showInactive();
+    });
+    tray.setToolTip(app.getName());
+    tray.setContextMenu(contextMenu);
 
-// 全てのウィンドウが閉じたときの処理
+    createWindow();
+
+    app.on('activate', () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow();
+        }
+    });
+});
+
 app.on('window-all-closed', () => {
-    // macOSのとき以外はアプリケーションを終了させます
     if (process.platform !== 'darwin') {
         app.quit();
-    }
-});
-// アプリケーションがアクティブになった時の処理(Macだと、Dockがクリックされた時）
-app.on('activate', () => {
-    // メインウィンドウが消えている場合は再度メインウィンドウを作成する
-    if (mainWindow === null) {
-        createWindow();
     }
 });
