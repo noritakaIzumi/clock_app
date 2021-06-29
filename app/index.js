@@ -32,6 +32,10 @@
         localStorage.setItem('windowPosition', JSON.stringify(windowPosition));
     };
 
+    const saveTheme = () => {
+        localStorage.setItem('theme', document.getElementById('theme').value);
+    };
+
     let time1 = getTime();
     let time2 = getTime();
     const interval1 = 10; // milliseconds
@@ -44,6 +48,7 @@
         }
         if (currentTime - time2 >= interval2) {
             saveWindowPosition.call();
+            saveTheme.call();
             time2 = getTime();
         }
         requestAnimationFrame(loop);
