@@ -1,6 +1,6 @@
 {
   "name": "chikku-takku",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "でじたる時計です",
   "main": "./app/main.js",
   "dependencies": {
