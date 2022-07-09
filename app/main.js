@@ -18,6 +18,10 @@ function createWindow(width, height, workAreaSize) {
             preload: path.join(__dirname, 'preload.js')
         },
     });
+    // https://stackoverflow.com/questions/50142924/create-electron-transparent-window-ontop-but-clickable-below-programs
+    win.setIgnoreMouseEvents(true);
+    win.setFocusable(false);
+
     win.removeMenu();
 
     win.webContents
