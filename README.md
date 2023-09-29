@@ -29,7 +29,7 @@ git-chglog -o CHANGELOG.md
 Prepare (npm required)
 
 ```shell
-npm install # or npm update
+npm ci
 ```
 
 Preview app
