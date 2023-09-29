@@ -4,9 +4,9 @@
   "description": "でじたる時計です",
   "main": "./app/main.js",
   "dependencies": {
-    "electron": "^19.0.7",
+    "electron": "^22.3.23",
     "electron-icon-builder": "^2.0.1",
-    "electron-packager": "^15.5.1",
+    "electron-packager": "^17.1.2",
     "menu": "^0.2.5"
   },
   "devDependencies": {
