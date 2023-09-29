@@ -10,7 +10,7 @@
     "menu": "^0.2.5"
   },
   "devDependencies": {
-    "http-server": "^0.12.3"
+    "http-server": "^14.1.1"
   },
   "scripts": {
     "start": "electron ./app",
